@@ -47,8 +47,8 @@ export const StrokeWidthSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="Stroke options"
-        description="Modify the stroke of your element"
+        title="Opções de traço"
+        description="Modificar o traço do seu elemento"
       />
       <ScrollArea>
         <div className="p-4 space-y-4 border-b">

@@ -106,7 +106,7 @@ export const Navbar = ({
             <MousePointerClick className="size-4" />
           </Button>
         </Hint>
-        <Hint label="Undo" side="bottom" sideOffset={10}>
+        <Hint label="Desfazer" side="bottom" sideOffset={10}>
           <Button
             disabled={!editor?.canUndo()}
             variant="ghost"
@@ -116,7 +116,7 @@ export const Navbar = ({
             <Undo2 className="size-4" />
           </Button>
         </Hint>
-        <Hint label="Redo" side="bottom" sideOffset={10}>
+        <Hint label="Refazer" side="bottom" sideOffset={10}>
           <Button
             disabled={!editor?.canRedo()}
             variant="ghost"

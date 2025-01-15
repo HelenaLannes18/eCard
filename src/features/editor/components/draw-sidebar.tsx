@@ -48,8 +48,8 @@ export const DrawSidebar = ({
       )}
     >
       <ToolSidebarHeader
-        title="Drawing mode"
-        description="Modify brush settings"
+        title="Modo de desenho"
+        description="Modificar configurações do pincel"
       />
       <ScrollArea>
         <div className="p-4 space-y-6 border-b">

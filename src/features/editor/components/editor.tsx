@@ -252,7 +252,7 @@ export const Editor = ({ initialData }: EditorProps) => {
             onChangeActiveTool={onChangeActiveTool}
             key={JSON.stringify(editor?.canvas.getActiveObject())}
           />
-          <div className="w-full mt-5 p-4">
+          {/* <div className="w-full mt-5 p-4">
             <label htmlFor="googleSheetUrl" className="block text-sm mb-2">
               Insira o link da planilha do Google:
             </label>
@@ -263,7 +263,7 @@ export const Editor = ({ initialData }: EditorProps) => {
               className="w-full border rounded px-3 py-2"
               onChange={handleGoogleSheetEmbed}
             />
-          </div>
+          </div> */}
           <div className="flex-1 h-[calc(100%-124px)] bg-muted" ref={containerRef}>
             <canvas ref={canvasRef} />
           </div>
