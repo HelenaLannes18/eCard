@@ -38,6 +38,10 @@ interface EditorProps {
 
 export const Editor = ({ initialData }: EditorProps) => {
   const { mutate } = useUpdateProject(initialData.id);
+  //teste busca do editor
+  const [searchTerm, setSearchTerm] = useState("");
+
+
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedSave = useCallback(
@@ -209,6 +213,8 @@ export const Editor = ({ initialData }: EditorProps) => {
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
         />
         <ImageSidebar
           editor={editor}

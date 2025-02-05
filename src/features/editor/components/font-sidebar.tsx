@@ -14,18 +14,26 @@ interface FontSidebarProps {
   editor: Editor | undefined;
   activeTool: ActiveTool;
   onChangeActiveTool: (tool: ActiveTool) => void;
+  searchTerm: string;
+  setSearchTerm: (term: string) => void;
 };
 
 export const FontSidebar = ({
   editor,
   activeTool,
   onChangeActiveTool,
+  searchTerm,
+  setSearchTerm
 }: FontSidebarProps) => {
   const value = editor?.getActiveFontFamily();
 
   const onClose = () => {
     onChangeActiveTool("select");
   };
+
+  const filteredFonts = fonts.filter((font) =>
+    font.toLowerCase().includes(searchTerm.toLocaleLowerCase())
+  );
 
   return (
     <aside
@@ -34,13 +42,22 @@ export const FontSidebar = ({
         activeTool === "font" ? "visible" : "hidden",
       )}
     >
+      <div className="p-4">
+        <input
+          type="text"
+          placeholder="Buscar fonte..."
+          className="w-full border rounded px-3 py-2"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <ToolSidebarHeader
         title="Fonte"
         description="Mude a fonte do texto"
       />
       <ScrollArea>
         <div className="p-4 space-y-1 border-b">
-          {fonts.map((font) => (
+          {filteredFonts.map((font) => (
             <Button
               key={font}
               variant="secondary"
@@ -59,6 +76,9 @@ export const FontSidebar = ({
               {font}
             </Button>
           ))}
+          {filteredFonts.length === 0 && (
+            <p className="text-center text-gray-500">Nenhuma fonte encontrada</p>
+          )}
         </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />
