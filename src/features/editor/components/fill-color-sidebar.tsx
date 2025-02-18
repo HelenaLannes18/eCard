@@ -5,6 +5,8 @@ import { ColorPicker } from "@/features/editor/components/color-picker";
 
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 interface FillColorSidebarProps {
   editor: Editor | undefined;
@@ -17,15 +19,35 @@ export const FillColorSidebar = ({
   activeTool,
   onChangeActiveTool,
 }: FillColorSidebarProps) => {
-  const value = editor?.getActiveFillColor() || FILL_COLOR;
+  // const value = editor?.getActiveFillColor() || FILL_COLOR;
+  const [color, setColor] = useState(editor?.getActiveFillColor() || FILL_COLOR);
+  const [customColors, setCustomColors] = useState<string[]>([]);
 
   const onClose = () => {
     onChangeActiveTool("select");
   };
 
-  const onChange = (value: string) => {
+  const onChange = (value: string, fromEyeDropper: boolean = false) => {
+    if (fromEyeDropper) {
+      setCustomColors((prevColors) => Array.from(new Set([value, ...prevColors])).slice(0, 10));
+    }
+    setColor(value);
     editor?.changeFillColor(value);
   };
+
+  const pickColorFromScreen = async () => {
+    if ("EyeDropper" in window) {
+      const eyeDropper = new (window as any).EyeDropper();
+      try {
+        const result = await eyeDropper.open();
+        onChange(result.sRGBHex);
+      } catch (error) {
+        console.error("Falha ao selecionar a cor:", error);
+      }
+    } else {
+      alert("Seu navegador não suporta o seletor de cores da tela")
+    }
+  }
 
   return (
     <aside
@@ -41,9 +63,13 @@ export const FillColorSidebar = ({
       <ScrollArea>
         <div className="p-4 space-y-6">
           <ColorPicker
-            value={value}
+            value={color}
             onChange={onChange}
+            customColors={customColors}
           />
+          <Button onClick={pickColorFromScreen} className="w-full">
+            Selecionar cor da tela
+          </Button>
         </div>
       </ScrollArea>
       <ToolSidebarClose onClick={onClose} />

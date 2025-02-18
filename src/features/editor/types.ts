@@ -97,7 +97,10 @@ export type ActiveTool =
   | "shapes"
   | "text"
   | "images"
+  | "pageSite"
+  | "desktop"
   | "draw"
+  | "buttons"
   | "fill"
   | "stroke-color"
   | "stroke-width"
@@ -255,6 +258,7 @@ export interface Editor {
   addTriangle: () => void;
   addInverseTriangle: () => void;
   addDiamond: () => void;
+  addButton: () => void;
   canvas: fabric.Canvas;
   getActiveFillColor: () => string;
   getActiveStrokeColor: () => string;

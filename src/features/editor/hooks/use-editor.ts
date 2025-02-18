@@ -534,6 +534,26 @@ const buildEditor = ({
       );
       addToCanvas(object);
     },
+    addButton: () => {
+      const HEIGHT = DIAMOND_OPTIONS.height;
+      const WIDTH = DIAMOND_OPTIONS.width;
+    
+      const object = new fabric.Textbox("Clique para editar", {
+        ...DIAMOND_OPTIONS,
+        width: WIDTH * 1.5, // Ajusta a largura do botão
+        height: HEIGHT / 2, // Ajusta a altura do botão
+        fontSize: 16,
+        textAlign: "center",
+        fill: fillColor,
+        stroke: strokeColor,
+        strokeWidth: strokeWidth,
+        strokeDashArray: strokeDashArray,
+        editable: true, // Permite edição do texto
+        backgroundColor: "white", // Para parecer um botão
+      });
+    
+      addToCanvas(object);
+    },    
     canvas,
     getActiveFontWeight: () => {
       const selectedObject = selectedObjects[0];

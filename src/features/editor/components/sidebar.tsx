@@ -8,6 +8,9 @@ import {
   Shapes,
   Sparkles,
   Type,
+  LaptopMinimalIcon,
+  PowerIcon,
+  Layers2Icon
 } from "lucide-react";
 
 import { ActiveTool } from "@/features/editor/types";
@@ -15,6 +18,7 @@ import { SidebarItem } from "@/features/editor/components/sidebar-item";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import { useDuplicateProject } from "@/features/projects/api/use-duplicate-project";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps {
   activeTool: ActiveTool;
@@ -25,13 +29,16 @@ export const Sidebar = ({
   activeTool,
   onChangeActiveTool,
 }: SidebarProps) => {
-  const router = useRouter();
+
 
   const duplicateMutation = useDuplicateProject();
 
   const onCopy = (id: string) => {
     duplicateMutation.mutate({ id });
   };
+
+  const pathname = usePathname();
+  const projectId = pathname.split("/").pop() || ""; // Obtém o ID do projeto
 
   return (
     <aside className="bg-white flex flex-col w-[100px] h-full border-r overflow-y-auto">
@@ -43,10 +50,10 @@ export const Sidebar = ({
           onClick={() => onChangeActiveTool("templates")}
         />
         <SidebarItem
-          icon={LayoutTemplate}
-          label="Mobile"
-          isActive={activeTool === "templates"}
-          onClick={() => onCopy("b35f7429-906e-40bb-8315-5348b89b9a8b")}
+          icon={LaptopMinimalIcon}
+          label="Desktop"
+          isActive={activeTool === "desktop"}
+          onClick={() => projectId && onCopy(projectId)}
         />
         <SidebarItem
           icon={ImageIcon}
@@ -67,10 +74,10 @@ export const Sidebar = ({
           onClick={() => onChangeActiveTool("ai")}
         /> */}
         <SidebarItem
-          icon={Sparkles}
+          icon={Layers2Icon}
           label="Páginas"
-          isActive={activeTool === "ai"}
-          onClick={() => onChangeActiveTool("ai")}
+          isActive={activeTool === "pageSite"}
+          onClick={() => onChangeActiveTool("pageSite")}
         />
         <SidebarItem
           icon={Sparkles}
@@ -89,6 +96,12 @@ export const Sidebar = ({
           label="Desenhar"
           isActive={activeTool === "draw"}
           onClick={() => onChangeActiveTool("draw")}
+        />
+        <SidebarItem
+          icon={PowerIcon}
+          label="Botões"
+          isActive={activeTool === "buttons"}
+          onClick={() => onChangeActiveTool("buttons")}
         />
         <SidebarItem
           icon={Settings}

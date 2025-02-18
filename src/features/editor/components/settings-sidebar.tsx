@@ -98,7 +98,7 @@ export const SettingsSidebar = ({
               onChange={(e) => changeWidth(e.target.value)}
             />
           </div>
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full bg-[#da00fe]">
             Redimensionar
           </Button>
         </form>

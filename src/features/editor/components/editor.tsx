@@ -31,6 +31,8 @@ import { TemplateSidebar } from "@/features/editor/components/template-sidebar";
 import { RemoveBgSidebar } from "@/features/editor/components/remove-bg-sidebar";
 import { SettingsSidebar } from "@/features/editor/components/settings-sidebar";
 import { NavbarTeste } from "./testeNavbar";
+import { ButtonSidebar } from "./buttons-sidebar";
+import { PageSiteSidebar } from "./site-pages-sidebar";
 
 interface EditorProps {
   initialData: ResponseType["data"];
@@ -231,7 +233,8 @@ export const Editor = ({ initialData }: EditorProps) => {
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
         />
-        <AiSidebar
+        <PageSiteSidebar
+          //@ts-ignore
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}
@@ -242,6 +245,11 @@ export const Editor = ({ initialData }: EditorProps) => {
           onChangeActiveTool={onChangeActiveTool}
         />
         <DrawSidebar
+          editor={editor}
+          activeTool={activeTool}
+          onChangeActiveTool={onChangeActiveTool}
+        />
+        <ButtonSidebar
           editor={editor}
           activeTool={activeTool}
           onChangeActiveTool={onChangeActiveTool}

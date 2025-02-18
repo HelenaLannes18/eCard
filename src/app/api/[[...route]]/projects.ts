@@ -64,6 +64,8 @@ const app = new Hono()
       return c.json({ data: { id } });
     },
   )
+  //fazer mais um desses para o redimensionamento pc
+  //comecar no formato mobile
   .post(
     "/:id/duplicate",
     verifyAuth(),
@@ -71,43 +73,55 @@ const app = new Hono()
     async (c) => {
       const auth = c.get("authUser");
       const { id } = c.req.valid("param");
-
+  
       if (!auth.token?.id) {
         return c.json({ error: "Unauthorized" }, 401);
       }
-
+  
       const data = await db
         .select()
         .from(projects)
-        .where(
-          and(
-            eq(projects.id, id),
-            eq(projects.userId, auth.token.id),
-          ),
-        );
-
+        .where(and(eq(projects.id, id), eq(projects.userId, auth.token.id)));
+  
       if (data.length === 0) {
-        return c.json({ error:" Not found" }, 404);
+        return c.json({ error: "Not found" }, 404);
       }
-
+  
       const project = data[0];
-
+  
+      // Parse o JSON original
+      let parsedJson;
+      try {
+        parsedJson = JSON.parse(project.json);
+      } catch (error) {
+        return c.json({ error: "Invalid JSON format" }, 500);
+      }
+  
+      // Atualizar width de todos os objetos
+      if (Array.isArray(parsedJson.objects)) {
+        parsedJson.objects = parsedJson.objects.map((obj: any) => ({
+          ...obj,
+          width: 900,
+        }));
+      }
+  
+      // Criar novo projeto duplicado com JSON atualizado
       const duplicateData = await db
         .insert(projects)
         .values({
           name: `Copy of ${project.name}`,
-          json: project.json,
-          width: project.width,
+          json: JSON.stringify(parsedJson), // Convertendo de volta para string
+          width: 900,
           height: project.height,
           userId: auth.token.id,
           createdAt: new Date(),
           updatedAt: new Date(),
         })
         .returning();
-
+  
       return c.json({ data: duplicateData[0] });
-    },
-  )
+    }
+  )  
   .get(
     "/",
     verifyAuth(),

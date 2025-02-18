@@ -34,7 +34,7 @@ export const ShapeSidebar = ({
     >
       <ToolSidebarHeader
         title="Formas"
-        description="Adicione formas ao seu quadro"
+        description="Adicione formas ao seu site"
       />
       <ScrollArea>
         <div className="grid grid-cols-3 gap-4 p-4">

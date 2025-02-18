@@ -26,7 +26,7 @@ export const SubscriptionModal = () => {
       <DialogContent>
         <DialogHeader className="flex items-center space-y-4">
           <Image
-            src="/logo.svg"
+            src="/icone.png"
             alt="Logo"
             width={36}
             height={36}

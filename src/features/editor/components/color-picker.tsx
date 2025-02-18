@@ -6,11 +6,13 @@ import { rgbaObjectToString } from "@/features/editor/utils";
 interface ColorPickerProps {
   value: string;
   onChange: (value: string) => void;
+  customColors?: string[];
 };
 
 export const ColorPicker = ({
   value,
   onChange,
+  customColors = []
 }: ColorPickerProps) => {
   return (
     <div className="w-full space-y-4">
@@ -24,7 +26,7 @@ export const ColorPicker = ({
       />
       <CirclePicker
         color={value}
-        colors={colors}
+        colors={[...customColors, ...colors]}
         onChangeComplete={(color) => {
           const formattedValue = rgbaObjectToString(color.rgb);
           onChange(formattedValue);

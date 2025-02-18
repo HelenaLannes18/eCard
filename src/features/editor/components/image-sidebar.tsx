@@ -46,7 +46,7 @@ export const ImageSidebar = ({
       <div className="p-4 border-b">
         <UploadButton
           appearance={{
-            button: "w-full text-sm font-medium",
+            button: "w-full text-sm font-medium bg-[#da00fe] hover:bg-[#b000e0] text-white",
             allowedContent: "hidden"
           }}
           content={{

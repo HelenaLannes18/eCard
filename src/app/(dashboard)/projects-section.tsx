@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useConfirm } from "@/hooks/use-confirm";
+import { ptBR } from "date-fns/locale";
 
 export const ProjectsSection = () => {
   const [ConfirmDialog, confirm] = useConfirm(
@@ -140,6 +141,7 @@ export const ProjectsSection = () => {
                   >
                     {formatDistanceToNow(project.updatedAt, {
                       addSuffix: true,
+                      locale: ptBR,
                     })}
                   </TableCell>
                   <TableCell className="flex items-center justify-end">
