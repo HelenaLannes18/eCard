@@ -8,6 +8,7 @@ import { auth } from "@/auth";
 import { Modals } from "@/components/modals";
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "@/components/providers";
+import { Analytics } from "@vercel/analytics/react"
 
 import "./globals.css";
 
@@ -34,6 +35,7 @@ export default async function RootLayout({
             <Modals />
             <SubscriptionAlert />
             {children}
+            <Analytics />
           </Providers>
         </body>
       </html>
