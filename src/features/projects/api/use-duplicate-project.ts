@@ -31,8 +31,7 @@ export const useDuplicateProject = () => {
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["projects"] });
-      // router.push(`/desktop/${data.data.id}`);
-      router.push(`/desktop/1aa94742-6f12-4048-aece-29720fb4621b`);
+      router.push(`/desktop/${data.data.id}`);
     },
     onError: () => {
       toast.error("Falha ao duplicar o projeto");

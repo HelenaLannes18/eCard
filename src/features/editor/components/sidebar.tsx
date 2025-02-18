@@ -39,6 +39,7 @@ export const Sidebar = ({
 
   const pathname = usePathname();
   const projectId = pathname.split("/").pop() || ""; // Obtém o ID do projeto
+  const router = useRouter();
 
   return (
     <aside className="bg-white flex flex-col w-[100px] h-full border-r overflow-y-auto">
@@ -53,7 +54,8 @@ export const Sidebar = ({
           icon={LaptopMinimalIcon}
           label="Desktop"
           isActive={activeTool === "desktop"}
-          onClick={() => projectId && onCopy(projectId)}
+          //onClick={() => projectId && onCopy(projectId)}
+          onClick={() => router.push(`/desktop/1aa94742-6f12-4048-aece-29720fb4621b`)}
         />
         <SidebarItem
           icon={ImageIcon}
