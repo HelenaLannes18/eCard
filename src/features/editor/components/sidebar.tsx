@@ -55,7 +55,7 @@ export const Sidebar = ({
           label="Desktop"
           isActive={activeTool === "desktop"}
           //onClick={() => projectId && onCopy(projectId)}
-          onClick={() => router.push(`/desktop/1aa94742-6f12-4048-aece-29720fb4621b`)}
+          onClick={() => router.push(`/editor/1aa94742-6f12-4048-aece-29720fb4621b`)}
         />
         <SidebarItem
           icon={ImageIcon}
